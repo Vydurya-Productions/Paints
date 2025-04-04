@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amritha Traders - About Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF3366',
+                        secondary: '#FFD700',
+                        accent: '#00D4B4',
+                        dark: '#1A1A2E',
+                        light: '#F9F7F7',
+                        splash: '#FF6F61',
+                        heroDark: '#2D1B3F',
+                        heroLight: '#6B4E71',
+                    },
+                    animation: {
+                        'paint-drip': 'paintDrip 4s infinite ease-in-out',
+                        'splatter': 'splatter 5s infinite',
+                        'wave': 'wave 8s infinite',
+                        'color-shift': 'colorShift 6s infinite',
+                        'float-up': 'floatUp 3s infinite',
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                        'brush-stroke': 'brushStroke 3s infinite'
+                    },
+                    keyframes: {
+                        paintDrip: {
+                            '0%, 100%': { transform: 'translateY(0) scale(1)' },
+                            '50%': { transform: 'translateY(20px) scale(1.1)' },
+                        },
+                        splatter: {
+                            '0%': { transform: 'rotate(0deg) scale(1)' },
+                            '50%': { transform: 'rotate(15deg) scale(1.2)' },
+                            '100%': { transform: 'rotate(0deg) scale(1)' },
+                        },
+                        wave: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' },
+                        },
+                        brushStroke: {
+                            '0%': { transform: 'translateX(-10px)' },
+                            '50%': { transform: 'translateX(10px)' },
+                            '100%': { transform: 'translateX(-10px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .paint-splash-bg {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path fill="%23FF6F61" d="M50,20 Q70,10 90,30 T110,50 Q120,70 100,90 T70,110 Q50,100 60,80 T50,20" opacity="0.3"/><path fill="%23FFD700" d="M120,30 Q140,20 160,40 T180,60 Q170,80 150,70 T120,30" opacity="0.4"/></svg>'), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path fill="%2300D4B4" d="M30,130 Q50,110 70,130 T90,150 Q80,170 60,160 T30,130" opacity="0.35"/></svg>');
+            background-repeat: no-repeat, no-repeat;
+            background-position: top left, bottom right;
+            background-size: 300px, 250px;
+        }
+
+        .brush-stroke {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100"><path fill="none" stroke="%23FF6F61" stroke-width="20" stroke-linecap="round" d="M20,80 Q100,20 280,80" opacity="0.2"/></svg>');
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .navbar-paint {
+            background: linear-gradient(90deg, #FF3366, #FFD700, #00D4B4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .mission-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .founder-card {
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1), 0 0 0 5px rgba(255,214,0,0.2);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #FF3366;
+            border: 4px solid #FFD700;
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, #2D1B3F 0%, #6B4E71 50%, #FF3366 100%);
+            animation: wave 8s infinite;
+        }
+    </style>
+</head>
+<body class="bg-light font-sans antialiased overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="bg-dark bg-opacity-90 shadow-lg sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <i class="fas fa-paint-roller text-primary text-3xl mr-3 animate-spin-slow"></i>
+                        <span class="text-2xl font-extrabold text-white tracking-wide">Amritha Traders</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html" class="text-white hover:text-primary font-medium transition duration-300 nav-link"> <i class="fas fa-home mr-2"></i>Home</a>
+                    <a href="about.html" class="text-primary font-medium transition duration-300 nav-link"><i class="fas fa-info-circle mr-2"></i> About Us</a>
+                    <a href="products.html" class="text-white hover:text-primary font-medium transition duration-300 nav-link">  <i class="fas fa-paint-roller mr-2"></i>Products</a>
+                    <a href="services.html" class="text-white hover:text-primary font-medium transition duration-300 nav-link"> <i class="fas fa-brush mr-2"></i> Services</a>
+                    <a href="gallery.html" class="text-white hover:text-primary font-medium transition duration-300 nav-link"> <i class="fas fa-images mr-2"></i> Gallery</a>
+                    <a href="contact.html" class="text-white hover:text-primary font-medium transition duration-300 nav-link">  <i class="fas fa-envelope mr-2"></i> Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobileMenuButton" class="text-white hover:text-primary focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg paint-splash-bg relative py-24 md:py-32 overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-10 left-10 w-20 h-20 bg-splash rounded-full opacity-20 animate-splatter"></div>
+            <div class="absolute top-1/4 right-20 w-16 h-16 bg-secondary rounded-full opacity-20 animate-splatter" style="animation-delay: 1s;"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center">
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight">
+                    <span class="inline-block">Our Colorful Journey</span>
+                </h1>
+                <p class="text-xl text-light opacity-90 mb-8 max-w-3xl mx-auto">
+                    Transforming spaces with passion, quality, and vibrant hues since 1995
+                </p>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-20 bg-light transform -skew-y-3"></div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section class="py-20 bg-white brush-stroke">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-extrabold text-dark mb-6">From Humble Beginnings</h2>
+                    <p class="text-gray-600 mb-6 text-lg">
+                        Founded in 1995 in the heart of Karunagapally, Amritha Traders began as a small family-owned paint store with a simple mission: to bring vibrant, high-quality paints to our community. What started as a modest shop has blossomed into one of the region's most trusted names in paints and coatings.
+                    </p>
+                    <p class="text-gray-600 mb-6 text-lg">
+                        Over the years, we've grown from selling basic paints to offering a comprehensive range of interior, exterior, decorative, and specialty coatings, while maintaining our commitment to quality and customer satisfaction.
+                    </p>
+                    <div class="bg-primary bg-opacity-10 p-6 rounded-xl border-l-4 border-primary">
+                        <p class="text-dark italic font-medium">
+                            "Colors are the smiles of nature. At Amritha Traders, we believe every space deserves to smile."
+                        </p>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1605152276897-4f618f831968" alt="Our store in early days" class="w-full rounded-2xl shadow-2xl">
+                    <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-secondary rounded-full opacity-20 animate-splatter hidden md:block"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="py-20 bg-gray-50 paint-splash-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold text-dark mb-4">Our Core Beliefs</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">The principles that guide every brushstroke</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                <div class="mission-card p-8 rounded-2xl shadow-lg relative overflow-hidden">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-primary rounded-full opacity-10"></div>
+                    <div class="flex items-start mb-6">
+                        <div class="bg-primary text-white p-4 rounded-full mr-6">
+                            <i class="fas fa-bullseye text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-dark mb-3">Our Mission</h3>
+                            <p class="text-gray-600">
+                                To provide exceptional quality paints and coatings that inspire creativity, protect surfaces, and transform spaces while maintaining an unwavering commitment to environmental responsibility and customer satisfaction.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mission-card p-8 rounded-2xl shadow-lg relative overflow-hidden">
+                    <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-accent rounded-full opacity-10"></div>
+                    <div class="flex items-start mb-6">
+                        <div class="bg-accent text-white p-4 rounded-full mr-6">
+                            <i class="fas fa-eye text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-dark mb-3">Our Vision</h3>
+                            <p class="text-gray-600">
+                                To be the most trusted and innovative paint solutions provider in Kerala, recognized for our vibrant colors, durable products, and transformative painting services that enhance both residential and commercial spaces.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-dark text-white p-8 rounded-2xl shadow-2xl">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="text-5xl font-bold text-primary mb-2">25+</div>
+                        <div class="text-xl">Years in Business</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-5xl font-bold text-secondary mb-2">10K+</div>
+                        <div class="text-xl">Satisfied Customers</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-5xl font-bold text-accent mb-2">300+</div>
+                        <div class="text-xl">Color Varieties</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Timeline -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold text-dark mb-4">Our Colorful Timeline</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Milestones in our journey of color</p>
+            </div>
+            
+            <div class="relative max-w-3xl mx-auto">
+                <div class="absolute left-1/2 w-1 h-full bg-gradient-to-b from-primary to-accent transform -translate-x-1/2"></div>
+                
+                <div class="mb-12 relative pl-8 md:pl-0">
+                    <div class="md:w-1/2 md:pr-16 md:text-right">
+                        <h3 class="text-2xl font-bold text-dark mb-2">1995 - Humble Beginnings</h3>
+                        <p class="text-gray-600">Founded as a small paint retail store in Karunagapally by Mr. Rajeev Kumar with just 50 paint varieties</p>
+                    </div>
+                    <div class="hidden md:block absolute top-0 right-1/2 w-6 h-6 bg-primary rounded-full border-4 border-secondary transform translate-x-1/2"></div>
+                </div>
+                
+                <div class="mb-12 relative pl-8 md:pl-0 md:text-left md:ml-auto md:w-1/2">
+                    <div class="md:pl-16">
+                        <h3 class="text-2xl font-bold text-dark mb-2">2002 - First Expansion</h3>
+                        <p class="text-gray-600">Opened our second location in Kollam, introducing professional painting services</p>
+                    </div>
+                    <div class="hidden md:block absolute top-0 left-1/2 w-6 h-6 bg-accent rounded-full border-4 border-secondary transform -translate-x-1/2"></div>
+                </div>
+                
+                <div class="mb-12 relative pl-8 md:pl-0">
+                    <div class="md:w-1/2 md:pr-16 md:text-right">
+                        <h3 class="text-2xl font-bold text-dark mb-2">2010 - Eco-Friendly Line</h3>
+                        <p class="text-gray-600">Launched our first zero-VOC eco-friendly paints, leading the green revolution in Kerala</p>
+                    </div>
+                    <div class="hidden md:block absolute top-0 right-1/2 w-6 h-6 bg-secondary rounded-full border-4 border-primary transform translate-x-1/2"></div>
+                </div>
+                
+                <div class="mb-12 relative pl-8 md:pl-0 md:text-left md:ml-auto md:w-1/2">
+                    <div class="md:pl-16">
+                        <h3 class="text-2xl font-bold text-dark mb-2">2018 - Digital Transformation</h3>
+                        <p class="text-gray-600">Introduced color visualizer tools and online consultations, blending tradition with technology</p>
+                    </div>
+                    <div class="hidden md:block absolute top-0 left-1/2 w-6 h-6 bg-splash rounded-full border-4 border-secondary transform -translate-x-1/2"></div>
+                </div>
+                
+                <div class="relative pl-8 md:pl-0">
+                    <div class="md:w-1/2 md:pr-16 md:text-right">
+                        <h3 class="text-2xl font-bold text-dark mb-2">2023 - Present Day</h3>
+                        <p class="text-gray-600">Now serving customers across South India with 300+ colors and comprehensive painting solutions</p>
+                    </div>
+                    <div class="hidden md:block absolute top-0 right-1/2 w-6 h-6 bg-primary rounded-full border-4 border-accent transform translate-x-1/2 animate-pulse"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founder's Message -->
+    <section class="py-20 bg-gray-50 paint-splash-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold text-dark mb-4">Words From Our Founder</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">The passion behind the colors</p>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden max-w-5xl mx-auto founder-card">
+                <div class="md:flex">
+                    <div class="md:w-1/3 bg-dark flex items-center justify-center p-8">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956" alt="Mr. Rajeev Kumar, Founder" class="w-48 h-48 rounded-full object-cover border-4 border-secondary shadow-lg">
+                    </div>
+                    <div class="md:w-2/3 p-8">
+                        <h3 class="text-2xl font-bold text-dark mb-2">Mr. Rajeev Kumar</h3>
+                        <p class="text-primary font-medium mb-6">Founder & Chief Color Consultant</p>
+                        <p class="text-gray-600 mb-6 italic">
+                            "When I started Amritha Traders in 1995, I had a simple dream - to help people transform their houses into homes with beautiful, durable colors. What began as a small shop has grown beyond my imagination, but our core values remain unchanged."
+                        </p>
+                        <p class="text-gray-600 mb-6">
+                            Every day, I'm inspired by our team's dedication and our customers' trust. We don't just sell paint; we help create environments where memories are made, businesses thrive, and lives become more colorful.
+                        </p>
+                        <p class="text-gray-600">
+                            As we continue this journey, we remain committed to innovation, quality, and most importantly - helping you find the perfect color for every story.
+                        </p>
+                        <div class="mt-6 flex justify-end">
+                            <img src="https://signaturely.com/wp-content/uploads/2020/11/signaturely-demo-signature.svg" alt="Signature" class="h-12">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Team -->
+    <section class="py-20 bg-white brush-stroke">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold text-dark mb-4">Meet Our Color Experts</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">The talented team behind your perfect finish</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2" alt="Team Member" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-dark mb-1">Anjali Menon</h3>
+                        <p class="text-primary font-medium mb-4">Color Consultant</p>
+                        <p class="text-gray-600 text-sm">15 years helping clients find their perfect hues</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="Team Member" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-dark mb-1">Suresh Kumar</h3>
+                        <p class="text-primary font-medium mb-4">Master Painter</p>
+                        <p class="text-gray-600 text-sm">Transforming spaces with precision for 12 years</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e" alt="Team Member" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-dark mb-1">Priya Nair</h3>
+                        <p class="text-primary font-medium mb-4">Product Specialist</p>
+                        <p class="text-gray-600 text-sm">Expert in eco-friendly and specialty coatings</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+                    <img src="https://images.unsplash.com/photo-1583864697784-a0efc8379f70" alt="Team Member" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-dark mb-1">Arjun Pillai</h3>
+                        <p class="text-primary font-medium mb-4">Customer Experience</p>
+                        <p class="text-gray-600 text-sm">Ensuring your painting journey is seamless</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Promise -->
+    <section class="py-20 bg-primary text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold mb-4">Our Color Promise</h2>
+                <p class="text-xl opacity-90 max-w-3xl mx-auto">Commitments we live by</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white bg-opacity-10 p-8 rounded-2xl backdrop-blur-sm">
+                    <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-medal text-2xl text-secondary"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center">Quality Assurance</h3>
+                    <p class="text-center opacity-90">
+                        We source only premium ingredients and test every batch to ensure vibrant, long-lasting colors that stand the test of time.
+                    </p>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 p-8 rounded-2xl backdrop-blur-sm">
+                    <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-leaf text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center">Eco-Friendly</h3>
+                    <p class="text-center opacity-90">
+                        Our paints are formulated to be environmentally responsible, with low-VOC options that are safe for your family and the planet.
+                    </p>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 p-8 rounded-2xl backdrop-blur-sm">
+                    <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-heart text-2xl text-splash"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center">Customer Happiness</h3>
+                    <p class="text-center opacity-90">
+                        Your satisfaction is our top priority. From expert advice to after-sales support, we're with you at every step.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-dark text-white paint-splash-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-extrabold mb-6">Ready to Color Your World?</h2>
+            <p class="text-xl opacity-90 mb-8 max-w-3xl mx-auto">
+                Whether you need expert advice, premium paints, or professional painting services, our team is here to help.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="contact.html" class="bg-secondary text-dark px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition duration-300 transform hover:scale-105 shadow-xl animate-float-up">
+                    Contact Us
+                </a>
+                <a href="products.html" class="bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition duration-300 transform hover:scale-105 shadow-xl animate-float-up delay-200">
+                    Browse Products
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-16 paint-splash-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-paint-roller text-primary text-3xl mr-3 animate-spin-slow"></i>
+                        <span class="text-2xl font-extrabold">Amritha Traders</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        Premium paints and expert services to bring your colorful vision to life.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300"><i class="fab fa-facebook-f text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300"><i class="fab fa-pinterest-p text-xl"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-gray-400 hover:text-primary transition duration-300">Home</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-primary transition duration-300">About Us</a></li>
+                        <li><a href="products.html" class="text-gray-400 hover:text-primary transition duration-300">Products</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-primary transition duration-300">Services</a></li>
+                        <li><a href="gallery.html" class="text-gray-400 hover:text-primary transition duration-300">Gallery</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-primary transition duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Products</h3>
+                    <ul class="space-y-3">
+                        <li><a href="products.html" class="text-gray-400 hover:text-primary transition duration-300">Interior Paints</a></li>
+                        <li><a href="products.html" class="text-gray-400 hover:text-primary transition duration-300">Exterior Paints</a></li>
+                        <li><a href="products.html" class="text-gray-400 hover:text-primary transition duration-300">Eco-Friendly Paints</a></li>
+                        <li><a href="products.html" class="text-gray-400 hover:text-primary transition duration-300">Metallic Finishes</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Contact Us</h3>
+                    <p class="text-gray-400 mb-2"><i class="fas fa-map-marker-alt text-primary mr-2"></i> Amritha Building, Market Road, Karunagapally</p>
+                    <p class="text-gray-400 mb-2"><i class="fas fa-phone-alt text-primary mr-2"></i> +91 99 47 12 36 31</p>
+                    <p class="text-gray-400 mb-4"><i class="fas fa-envelope text-primary mr-2"></i> info@amrithatraders.com</p>
+                    <button class="bg-primary text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-opacity-90 transition duration-300">
+                        Get Directions
+                    </button>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center">
+                <p class="text-gray-400">© 2025 Amritha Traders. All rights reserved.</p>
+                <div class="flex justify-center space-x-6 mt-4">
+                    <a href="#" class="text-gray-400 hover:text-primary transition duration-300">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition duration-300">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300 animate-pulse-glow">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Back to Top Button
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Animate elements when they come into view
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.timeline-item, .mission-card, .founder-card');
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.classList.add('animate-fadeIn');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>

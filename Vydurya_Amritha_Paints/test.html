@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amritha Paints - Premium Paints & Painting Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4F46E5',
+                        secondary: '#F59E0B',
+                        accent: '#10B981',
+                        dark: '#1F2937',
+                        light: '#F3F4F6',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 6s infinite',
+                        'spin-slow': 'spin 8s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'bounce-slow': 'bounce 4s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .paint-splatter {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%234F46E5"><path d="M30,15 Q40,5 50,15 T70,15 Q80,25 70,35 T70,55 Q60,65 50,55 T30,55 Q20,45 30,35 T30,15" opacity="0.2"/></svg>');
+            background-size: 200px;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .paint-card:hover {
+            transform: translateY(-10px) rotateY(10deg);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .color-option:hover {
+            transform: scale(1.2);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(79,70,229,0.8) 0%, rgba(99,102,241,0.6) 50%, rgba(167,139,250,0.4) 100%);
+        }
+        
+        .paint-brush {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%23F59E0B"><path d="M20,80 L30,70 L80,20 L90,30 L40,80 Z" opacity="0.1"/></svg>');
+            background-size: 300px;
+            background-repeat: no-repeat;
+            background-position: right bottom;
+        }
+    </style>
+</head>
+<body class="bg-light font-sans antialiased">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-paint-roller text-primary text-3xl mr-2"></i>
+                        <span class="text-xl font-bold text-dark">Amritha Paints</span>
+                    </div>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+                    <a href="#" class="text-dark hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition duration-300">Home</a>
+                    <a href="#products" class="text-dark hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition duration-300">Products</a>
+                    <a href="#services" class="text-dark hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition duration-300">Services</a>
+                    <a href="#gallery" class="text-dark hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition duration-300">Gallery</a>
+                    <a href="#contact" class="text-dark hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition duration-300">Contact</a>
+                    <button class="bg-primary text-white px-4 py-2 rounded-md hover:bg-opacity-90 transition duration-300 transform hover:scale-105">
+                        Get a Quote
+                    </button>
+                </div>
+                <div class="-mr-2 flex items-center md:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-dark hover:text-primary focus:outline-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient paint-splatter relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+            <div class="md:flex items-center">
+                <div class="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-pulse">
+                        Transform Your Space <br> With <span class="text-secondary">Color</span>
+                    </h1>
+                    <p class="text-lg text-white opacity-90 mb-8 max-w-lg mx-auto md:mx-0">
+                        Premium quality paints and professional painting services to bring your vision to life.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+                        <button class="bg-secondary text-white px-6 py-3 rounded-lg font-medium hover:bg-opacity-90 transition duration-300 transform hover:scale-105 shadow-lg">
+                            Explore Products
+                        </button>
+                        <button class="bg-white text-primary px-6 py-3 rounded-lg font-medium hover:bg-opacity-90 transition duration-300 transform hover:scale-105 shadow-lg">
+                            Our Services
+                        </button>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center relative">
+                    <div class="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
+                        <div class="absolute inset-0 bg-white rounded-full opacity-20 animate-pulse-slow"></div>
+                        <div class="absolute inset-4 bg-white rounded-full opacity-20 animate-pulse-slow delay-1000"></div>
+                        <div class="absolute inset-8 bg-white rounded-full opacity-20 animate-pulse-slow delay-2000"></div>
+                        <img src="https://images.unsplash.com/photo-1560343090-f0409e92791a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" 
+                             alt="Paint cans" 
+                             class="absolute inset-0 w-full h-full object-contain rounded-full border-8 border-white shadow-xl animate-float">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-16 bg-white transform skew-y-2 origin-bottom-left"></div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-dark mb-4">Why Choose Amritha Paints?</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Premium quality, exceptional durability, and stunning colors for every surface</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-light p-8 rounded-xl shadow-md hover:shadow-xl transition duration-500 transform hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-palette text-primary text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-dark mb-3 text-center">200+ Colors</h3>
+                    <p class="text-gray-600 text-center">Wide range of beautiful colors to match any style and preference.</p>
+                </div>
+                <div class="bg-light p-8 rounded-xl shadow-md hover:shadow-xl transition duration-500 transform hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-secondary bg-opacity-10 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-shield-alt text-secondary text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-dark mb-3 text-center">10-Year Warranty</h3>
+                    <p class="text-gray-600 text-center">Our premium paints come with industry-leading warranty protection.</p>
+                </div>
+                <div class="bg-light p-8 rounded-xl shadow-md hover:shadow-xl transition duration-500 transform hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-accent bg-opacity-10 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-brush text-accent text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-dark mb-3 text-center">Expert Application</h3>
+                    <p class="text-gray-600 text-center">Professional painters for flawless, long-lasting results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-16 bg-gray-50 paint-brush">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-dark mb-4">Our Premium Paint Products</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Explore our range of high-quality paints for every surface</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Product 1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg paint-card transition duration-500">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1579547945413-497e1b99dac0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                             alt="Interior Wall Paint" 
+                             class="w-full h-full object-cover transform hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 right-4 bg-primary text-white text-xs font-bold px-2 py-1 rounded-full">
+                            Best Seller
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-dark mb-2">Luxe Interior</h3>
+                        <p class="text-gray-600 mb-4">Premium matte finish for interior walls with superior coverage.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-primary">₹1,299</span>
+                            <button class="text-primary hover:text-primary-dark font-medium">
+                                View Details <i class="fas fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg paint-card transition duration-500">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1622372738946-62e02505feb3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1132&q=80" 
+                             alt="Exterior Weatherproof Paint" 
+                             class="w-full h-full object-cover transform hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-dark mb-2">WeatherShield Pro</h3>
+                        <p class="text-gray-600 mb-4">Advanced protection against harsh weather conditions.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-primary">₹1,899</span>
+                            <button class="text-primary hover:text-primary-dark font-medium">
+                                View Details <i class="fas fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg paint-card transition duration-500">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                             alt="Eco-Friendly Paint" 
+                             class="w-full h-full object-cover transform hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 right-4 bg-accent text-white text-xs font-bold px-2 py-1 rounded-full">
+                            Eco-Friendly
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-dark mb-2">Nature's Hue</h3>
+                        <p class="text-gray-600 mb-4">Zero-VOC, environmentally friendly paint for healthy living.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-primary">₹1,599</span>
+                            <button class="text-primary hover:text-primary-dark font-medium">
+                                View Details <i class="fas fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg paint-card transition duration-500">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                             alt="Metallic Finish Paint" 
+                             class="w-full h-full object-cover transform hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 right-4 bg-secondary text-white text-xs font-bold px-2 py-1 rounded-full">
+                            New
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-dark mb-2">Metallic Elegance</h3>
+                        <p class="text-gray-600 mb-4">Luxurious metallic finish for a modern, sophisticated look.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-primary">₹2,299</span>
+                            <button class="text-primary hover:text-primary-dark font-medium">
+                                View Details <i class="fas fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="bg-primary text-white px-8 py-3 rounded-lg font-medium hover:bg-opacity-90 transition duration-300 transform hover:scale-105 shadow-lg">
+                    View All Products
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Color Picker Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-dark mb-4">Explore Our Color Palette</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Find your perfect shade from our extensive collection</p>
+            </div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-4 mb-12">
+                <div class="color-option w-12 h-12 rounded-full bg-blue-500 shadow-md cursor-pointer transition duration-300 mx-auto"></div>
+                <div class="color-option w-12 h-12 rounded-full bg-green-500 shadow-md cursor-pointer transition duration-300 mx-auto"></div>
+                <div class="color-option w-12 h-12 rounded-full bg-red-500 shadow-md cursor-pointer transition duration-300 mx-auto"></div>
+                <div class="color-option w-12 h-12 rounded-full bg-yellow-400 shadow-md cursor-pointer transition duration-300 mx-auto"></div>
+                <div class="color-option w-12 h-12 rounded-full bg-purple-600 shadow-md cursor-pointer transition duration-300 mx-auto"></div>
+                <div class="color-option w-12 h-12 rounded-full bg-pink-400 shadow-md cursor-pointer transition duration-300 mx-auto"></div>
+                <div class="color-option w-12 h-12 rounded-full bg-indigo-700 shadow-md cursor-pointer transition duration-300 mx-auto"></div>
+                <div class="color-option w-12 h-12 rounded-full bg-gray-800 shadow-md cursor-pointer transition duration-300 mx-auto"></div>
+            </div>
+            
+            <div class="bg-light rounded-xl p-8 shadow-lg">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-8 md:mb-0">
+                        <h3 class="text-2xl font-bold text-dark mb-4">Try Our Virtual Color Visualizer</h3>
+                        <p class="text-gray-600 mb-6">See how our paints will look in your space before you buy. Upload a photo of your room and experiment with different colors.</p>
+                        <button class="bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-opacity-90 transition duration-300 transform hover:scale-105 shadow-lg">
+                            Try It Now
+                        </button>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center">
+                        <div class="relative w-64 h-64">
+                            <div class="absolute inset-0 bg-white rounded-lg shadow-md overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1100&q=80" 
+                                     alt="Room with paint colors" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <div class="absolute -top-4 -left-4 w-16 h-16 bg-primary rounded-lg shadow-lg transform rotate-12 animate-bounce-slow"></div>
+                            <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-secondary rounded-lg shadow-lg transform -rotate-12 animate-bounce-slow delay-1000"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-dark mb-4">Our Professional Painting Services</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Expert application for flawless, long-lasting results</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg group relative">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                             alt="Interior Painting" 
+                             class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-primary bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500">
+                            <button class="bg-white text-primary px-6 py-2 rounded-lg font-medium">
+                                Learn More
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-dark mb-3">Interior Painting</h3>
+                        <p class="text-gray-600 mb-4">Transform your interiors with our expert painting services for walls, ceilings, and trim.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-clock mr-2"></i>
+                            <span>2-5 days depending on size</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg group relative">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                             alt="Exterior Painting" 
+                             class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-secondary bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500">
+                            <button class="bg-white text-secondary px-6 py-2 rounded-lg font-medium">
+                                Learn More
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-dark mb-3">Exterior Painting</h3>
+                        <p class="text-gray-600 mb-4">Protect and beautify your home's exterior with our weather-resistant paints and techniques.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-clock mr-2"></i>
+                            <span>3-7 days depending on size</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg group relative">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1606744837616-56c9a5c6a6eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1133&q=80" 
+                             alt="Commercial Painting" 
+                             class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-accent bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500">
+                            <button class="bg-white text-accent px-6 py-2 rounded-lg font-medium">
+                                Learn More
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-dark mb-3">Commercial Painting</h3>
+                        <p class="text-gray-600 mb-4">Professional painting services for offices, retail spaces, and commercial properties.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-clock mr-2"></i>
+                            <span>Varies by project size</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 bg-primary rounded-xl p-8 text-white shadow-lg">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-2/3 mb-6 md:mb-0">
+                        <h3 class="text-2xl font-bold mb-2">Ready to Transform Your Space?</h3>
+                        <p class="opacity-90">Get a free estimate from our painting experts today.</p>
+                    </div>
+                    <div class="md:w-1/3 flex justify-center md:justify-end">
+                        <button class="bg-white text-primary px-8 py-3 rounded-lg font-medium hover:bg-opacity-90 transition duration-300 transform hover:scale-105 shadow-lg">
+                            Get Free Estimate
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-dark mb-4">Our Work Gallery</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">See the transformative power of color in our completed projects</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="relative group overflow-hidden rounded-xl shadow-lg h-64">
+                    <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1132&q=80" 
+                         alt="Living Room Painting" 
+                         class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500">
+                        <div class="text-center p-4">
+                            <h3 class="text-white text-xl font-bold mb-2">Modern Living Room</h3>
+                            <p class="text-white">Soft gray tones create a calming atmosphere</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative group overflow-hidden rounded-xl shadow-lg h-64">
+                    <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                         alt="Kitchen Painting" 
+                         class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500">
+                        <div class="text-center p-4">
+                            <h3 class="text-white text-xl font-bold mb-2">Contemporary Kitchen</h3>
+                            <p class="text-white">Crisp white with navy blue accents</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative group overflow-hidden rounded-xl shadow-lg h-64">
+                    <img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                         alt="Bedroom Painting" 
+                         class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500">
+                        <div class="text-center p-4">
+                            <h3 class="text-white text-xl font-bold mb-2">Serene Bedroom</h3>
+                            <p class="text-white">Soft blue tones for a peaceful retreat</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative group overflow-hidden rounded-xl shadow-lg h-64"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" 
+                    alt="Office Painting" 
+                    class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500">
+                        <div class="text-center p-4">
+                            <h3 class="text-white text-xl font-bold mb-2">Professional Office</h3>
+                            <p class="text-white">Neutral tones with bold accent walls</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative group overflow-hidden rounded-xl shadow-lg h-64">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1153&q=80" 
+                         alt="Exterior Home Painting" 
+                         class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500">
+                        <div class="text-center p-4">
+                            <h3 class="text-white text-xl font-bold mb-2">Home Exterior</h3>
+                            <p class="text-white">Classic combination with modern durability</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative group overflow-hidden rounded-xl shadow-lg h-64">
+                    <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                         alt="Commercial Building Painting" 
+                         class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500">
+                        <div class="text-center p-4">
+                            <h3 class="text-white text-xl font-bold mb-2">Commercial Building</h3>
+                            <p class="text-white">Vibrant colors for high visibility</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-dark mb-4">What Our Customers Say</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Hear from homeowners and businesses who transformed their spaces with Amritha Paints</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-md relative">
+                    <div class="absolute -top-4 -left-4 text-6xl text-primary                    opacity-10">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <div class="flex-shrink-0 mr-4">
+                            <img class="h-12 w-12 rounded-full" src="https://randomuser.me/api/portraits/women/43.jpg" alt="Customer">
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-dark">Priya Sharma</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "The painters from Amritha did an exceptional job on our home. The colors look even better than we imagined and the quality of the paint is outstanding. Our walls still look fresh after 3 years!"
+                    </p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-md relative">
+                    <div class="absolute -top-4 -left-4 text-6xl text-primary opacity-10">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <div class="flex-shrink-0 mr-4">
+                            <img class="h-12 w-12 rounded-full" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Customer">
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-dark">Rahul Patel</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "We used Amritha's eco-friendly paint for our nursery and couldn't be happier. No strong smell, beautiful color options, and peace of mind knowing it's safe for our baby. The service was professional from start to finish."
+                    </p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-md relative">
+                    <div class="absolute -top-4 -left-4 text-6xl text-primary opacity-10">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <div class="flex-shrink-0 mr-4">
+                            <img class="h-12 w-12 rounded-full" src="https://randomuser.me/api/portraits/women/65.jpg" alt="Customer">
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-dark">Ananya Gupta</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "The color consultation service was worth every penny! The expert helped us choose perfect shades that complement our furniture and lighting. The metallic accent wall in our living room is absolutely stunning."
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-12 flex justify-center">
+                <button class="bg-primary text-white px-8 py-3 rounded-lg font-medium hover:bg-opacity-90 transition duration-300 transform hover:scale-105 shadow-lg flex items-center">
+                    <i class="fas fa-pen-fancy mr-2"></i> Write a Review
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-dark mb-4">Frequently Asked Questions</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Find answers to common questions about our paints and services</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="space-y-4">
+                    <!-- FAQ Item 1 -->
+                    <div class="border border-gray-200 rounded-xl overflow-hidden transition duration-300 hover:shadow-md">
+                        <button class="faq-toggle w-full flex justify-between items-center p-6 focus:outline-none">
+                            <h3 class="text-lg font-semibold text-dark text-left">How do I calculate how much paint I need?</h3>
+                            <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content px-6 pb-6 hidden">
+                            <p class="text-gray-600">
+                                As a general rule, one liter of paint covers about 10-12 square meters of smooth surface. For textured surfaces, coverage may be less. Measure your walls (height x width) to calculate total area, subtract windows/doors, then divide by coverage rate. Our website has a paint calculator tool to help with this, or you can consult with our in-store experts.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 2 -->
+                    <div class="border border-gray-200 rounded-xl overflow-hidden transition duration-300 hover:shadow-md">
+                        <button class="faq-toggle w-full flex justify-between items-center p-6 focus:outline-none">
+                            <h3 class="text-lg font-semibold text-dark text-left">What's the difference between matte, satin, and gloss finishes?</h3>
+                            <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content px-6 pb-6 hidden">
+                            <p class="text-gray-600">
+                                Matte finishes have no shine and are great for hiding imperfections but are less washable. Satin (or eggshell) has a soft sheen, offers good durability, and is easier to clean. Gloss finishes are shiny, very durable and washable, but show surface imperfections more. We recommend matte for ceilings, satin for most walls, and gloss for trim, doors, and high-traffic areas.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 3 -->
+                    <div class="border border-gray-200 rounded-xl overflow-hidden transition duration-300 hover:shadow-md">
+                        <button class="faq-toggle w-full flex justify-between items-center p-6 focus:outline-none">
+                            <h3 class="text-lg font-semibold text-dark text-left">How long does exterior paint typically last?</h3>
+                            <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content px-6 pb-6 hidden">
+                            <p class="text-gray-600">
+                                With our premium WeatherShield Pro exterior paint, you can expect 8-10 years of durability in most climates. In harsh coastal or desert environments, repainting may be needed every 5-7 years. Proper surface preparation and application are crucial for maximum longevity. Our 10-year warranty guarantees against peeling, cracking, and excessive fading when applied according to our specifications.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 4 -->
+                    <div class="border border-gray-200 rounded-xl overflow-hidden transition duration-300 hover:shadow-md">
+                        <button class="faq-toggle w-full flex justify-between items-center p-6 focus:outline-none">
+                            <h3 class="text-lg font-semibold text-dark text-left">Do you offer color consultation services?</h3>
+                            <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content px-6 pb-6 hidden">
+                            <p class="text-gray-600">
+                                Yes! Our certified color consultants can visit your home or business for an on-site consultation (fee applies, credited toward paint purchase). We also offer free virtual consultations and in-store color matching services. Our experts consider lighting, architecture, existing furnishings, and your personal style to create a customized color palette that transforms your space.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <button class="text-primary font-medium hover:text-primary-dark transition duration-300 flex items-center justify-center mx-auto">
+                        View All FAQs <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-dark mb-4">Contact Us</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Have questions or ready to start your painting project? Get in touch!</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-dark mb-6">Send Us a Message</h3>
+                        <form>
+                            <div class="mb-6">
+                                <label for="name" class="block text-gray-700 font-medium mb-2">Your Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            <div class="mb-6">
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            <div class="mb-6">
+                                <label for="phone" class="block text-gray-700 font-medium mb-2">Phone Number</label>
+                                <input type="tel" id="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-700 font-medium mb-2">Your Message</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-primary text-white py-3 px-6 rounded-lg font-medium hover:bg-opacity-90 transition duration-300 shadow-lg">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-dark mb-6">Contact Information</h3>
+                            <div class="space-y-6">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 bg-primary bg-opacity-10 p-3 rounded-lg text-primary mr-4">
+                                        <i class="fas fa-map-marker-alt text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-dark mb-1">Our Location</h4>
+                                        <p class="text-gray-600">123 Color Street, Paint District<br>Bangalore, Karnataka 560001</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 bg-primary bg-opacity-10 p-3 rounded-lg text-primary mr-4">
+                                        <i class="fas fa-phone-alt text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-dark mb-1">Phone Numbers</h4>
+                                        <p class="text-gray-600">+91 80 1234 5678 (Office)<br>+91 98765 43210 (Mobile)</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 bg-primary bg-opacity-10 p-3 rounded-lg text-primary mr-4">
+                                        <i class="fas fa-envelope text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-dark mb-1">Email Address</h4>
+                                        <p class="text-gray-600">info@amrithapaints.com<br>support@amrithapaints.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-dark mb-6">Store Hours</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between border-b border-gray-100 pb-3">
+                                    <span class="text-gray-700">Monday - Friday</span>
+                                    <span class="font-medium text-dark">9:00 AM - 7:00 PM</span>
+                                </div>
+                                <div class="flex justify-between border-b border-gray-100 pb-3">
+                                    <span class="text-gray-700">Saturday</span>
+                                    <span class="font-medium text-dark">10:00 AM - 6:00 PM</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-700">Sunday</span>
+                                    <span class="font-medium text-dark">Closed</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-16 bg-primary text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-6">Stay Updated With Color Trends</h2>
+            <p class="text-lg opacity-90 max-w-2xl mx-auto mb-8">
+                Subscribe to our newsletter for the latest paint colors, design tips, and exclusive offers.
+            </p>
+            <div class="max-w-md mx-auto flex">
+                <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-l-lg focus:outline-none text-dark">
+                <button class="bg-secondary text-white px-6 py-3 rounded-r-lg font-medium hover:bg-opacity-90 transition duration-300">
+                    Subscribe
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-paint-roller text-primary text-3xl mr-2"></i>
+                        <span class="text-xl font-bold">Amritha Paints</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        Premium quality paints and professional painting services to transform your living and working spaces.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-pinterest-p text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
+                        <li><a href="#products" class="text-gray-400 hover:text-white transition duration-300">Products</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Services</a></li>
+                        <li><a href="#gallery" class="text-gray-400 hover:text-white transition duration-300">Gallery</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Products</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Interior Paints</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Exterior Paints</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Wood Finishes</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Metal Paints</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Specialty Finishes</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Services</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Residential Painting</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Commercial Painting</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Color Consultation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Surface Preparation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Wallpaper Installation</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">
+                    &copy; 2023 Amritha Paints. All rights reserved.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // FAQ Toggle Functionality
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+        
+        // Back to Top Button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Mobile Menu Toggle (placeholder - would need implementation)
+        const mobileMenuButton = document.querySelector('.md\\:hidden button');
+        mobileMenuButton.addEventListener('click', () => {
+            alert('Mobile menu would open here in a full implementation');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amritha Traders - Premium Paints & Color Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF3366', // Vibrant pinkish-red
+                        secondary: '#FFD700', // Golden yellow
+                        accent: '#00D4B4', // Bright teal
+                        dark: '#1A1A2E', // Deep navy
+                        light: '#F9F7F7', // Soft off-white
+                        splash: '#FF6F61', // Coral splash
+                        heroDark: '#2D1B3F', // Dark purple for hero
+                        heroLight: '#6B4E71', // Light purple accent
+                    },
+                    animation: {
+                        'paint-drip': 'paintDrip 4s infinite ease-in-out',
+                        'splatter': 'splatter 5s infinite',
+                        'wave': 'wave 8s infinite',
+                        'color-shift': 'colorShift 6s infinite',
+                        'float-up': 'floatUp 3s infinite',
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                        'brush-stroke': 'brushStroke 6s infinite linear',
+                        'color-spin': 'colorSpin 8s infinite linear',
+                    },
+                    keyframes: {
+                        paintDrip: {
+                            '0%, 100%': { transform: 'translateY(0) scale(1)' },
+                            '50%': { transform: 'translateY(20px) scale(1.1)' },
+                        },
+                        splatter: {
+                            '0%': { transform: 'rotate(0deg) scale(1)' },
+                            '50%': { transform: 'rotate(15deg) scale(1.2)' },
+                            '100%': { transform: 'rotate(0deg) scale(1)' },
+                        },
+                        wave: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' },
+                        },
+                        colorShift: {
+                            '0%': { backgroundColor: '#FF3366' },
+                            '33%': { backgroundColor: '#FFD700' },
+                            '66%': { backgroundColor: '#00D4B4' },
+                            '100%': { backgroundColor: '#FF3366' },
+                        },
+                        floatUp: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 10px rgba(255, 51, 102, 0.5)' },
+                            '50%': { boxShadow: '0 0 20px rgba(255, 51, 102, 0.8)' },
+                        },
+                        brushStroke: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '100%': { backgroundPosition: '100% 50%' },
+                        },
+                        colorSpin: {
+                            '0%': { filter: 'hue-rotate(0deg)' },
+                            '100%': { filter: 'hue-rotate(360deg)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Paint Splatter Background */
+        .paint-splash-bg {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path fill="%23FF6F61" d="M50,20 Q70,10 90,30 T110,50 Q120,70 100,90 T70,110 Q50,100 60,80 T50,20" opacity="0.3"/><path fill="%23FFD700" d="M120,30 Q140,20 160,40 T180,60 Q170,80 150,70 T120,30" opacity="0.4"/></svg>'), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path fill="%2300D4B4" d="M30,130 Q50,110 70,130 T90,150 Q80,170 60,160 T30,130" opacity="0.35"/></svg>');
+            background-repeat: no-repeat, no-repeat;
+            background-position: top left, bottom right;
+            background-size: 300px, 250px;
+        }
+
+        /* Card Hover Effect */
+        .paint-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .paint-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 20px rgba(255, 51, 102, 0.4);
+        }
+
+        /* Interactive Color Swatches */
+        .color-swatch {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease-out;
+        }
+        .color-swatch:hover {
+            transform: scale(1.3) rotate(10deg);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+        .color-swatch::before {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.4), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .color-swatch:hover::before {
+            opacity: 1;
+        }
+
+        /* Hero Gradient with Wave Effect */
+        .hero-bg {
+            background: linear-gradient(135deg, #2D1B3F 0%, #6B4E71 50%, #FF3366 100%);
+            background-size: 200% 200%;
+            animation: wave 8s ease infinite;
+        }
+
+        /* Paint Brush Stroke */
+        .brush-stroke {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100"><path fill="none" stroke="%23FF6F61" stroke-width="20" stroke-linecap="round" d="M20,80 Q100,20 280,80" opacity="0.2"/></svg>');
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        /* Gallery Hover Effect */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 51, 102, 0.3), rgba(0, 212, 180, 0.3));
+            transform: scale(0);
+            transition: transform 0.5s;
+            clip-path: circle(0% at 50% 50%);
+        }
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 28px rgba(0,0,0,0.15);
+        }
+        .gallery-item:hover::before {
+            transform: scale(1.5);
+            clip-path: circle(100% at 50% 50%);
+        }
+
+        /* Navbar Link Hover Effect */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background-color: #FF3366;
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* Paint Splatter Animation */
+        @keyframes paintSplatter {
+            0% { transform: scale(0.8) rotate(0deg); opacity: 0; }
+            50% { transform: scale(1.1) rotate(15deg); opacity: 1; }
+            100% { transform: scale(0.9) rotate(-10deg); opacity: 0; }
+        }
+
+        /* Floating Paint Drops */
+        .paint-drop {
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Colorful Underline */
+        .colorful-underline {
+            position: relative;
+            display: inline-block;
+        }
+        .colorful-underline::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #FF3366, #FFD700, #00D4B4);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        .colorful-underline:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transition: all 0.5s ease;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .mobile-menu.open {
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body class="bg-light font-sans antialiased overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="bg-dark bg-opacity-90 shadow-lg sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <i class="fas fa-paint-roller text-primary text-3xl mr-3 animate-spin-slow"></i>
+                        <span class="text-2xl font-extrabold text-white tracking-wide">Amritha Traders</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html" class="text-white hover:text-primary font-medium transition duration-300 nav-link">Home</a>
+                    <a href="about.html" class="text-white hover:text-primary font-medium transition duration-300 nav-link">About Us</a>
+                    <a href="products.html" class="text-white hover:text-primary font-medium transition duration-300 nav-link">Products</a>
+                    <a href="services.html" class="text-white hover:text-primary font-medium transition duration-300 nav-link">Services</a>
+                    <a href="gallery.html" class="text-white hover:text-primary font-medium transition duration-300 nav-link">Gallery</a>
+                    <a href="contact.html" class="text-white hover:text-primary font-medium transition duration-300 nav-link">Contact</a>
+                    <div class="relative group ml-4">
+                        <button class="flex items-center text-white hover:text-primary transition duration-300">
+                            <i class="fas fa-palette text-xl mr-2"></i>
+                            <span>Color Tools</span>
+                            <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                            <a href="color-picker.html" class="block px-4 py-2 text-gray-800 hover:bg-primary hover:text-white">Color Picker</a>
+                            <a href="visualizer.html" class="block px-4 py-2 text-gray-800 hover:bg-primary hover:text-white">Room Visualizer</a>
+                            <a href="trends.html" class="block px-4 py-2 text-gray-800 hover:bg-primary hover:text-white">Color Trends</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobileMenuButton" class="text-white hover:text-primary focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="mobile-menu md:hidden bg-dark bg-opacity-95 rounded-lg mt-2">
+                <div class="px-2 pt-2 pb-3 space-y-1">
+                    <a href="index.html" class="block px-3 py-2 rounded-md text-white hover:bg-primary hover:text-white">Home</a>
+                    <a href="about.html" class="block px-3 py-2 rounded-md text-white hover:bg-primary hover:text-white">About Us</a>
+                    <a href="products.html" class="block px-3 py-2 rounded-md text-white hover:bg-primary hover:text-white">Products</a>
+                    <a href="services.html" class="block px-3 py-2 rounded-md text-white hover:bg-primary hover:text-white">Services</a>
+                    <a href="gallery.html" class="block px-3 py-2 rounded-md text-white hover:bg-primary hover:text-white">Gallery</a>
+                    <a href="contact.html" class="block px-3 py-2 rounded-md text-white hover:bg-primary hover:text-white">Contact</a>
+                    <div class="pt-2 border-t border-gray-700">
+                        <p class="px-3 py-2 text-primary font-medium">Color Tools:</p>
+                        <a href="color-picker.html" class="block px-6 py-2 rounded-md text-white hover:bg-primary">Color Picker</a>
+                        <a href="visualizer.html" class="block px-6 py-2 rounded-md text-white hover:bg-primary">Room Visualizer</a>
+                        <a href="trends.html" class="block px-6 py-2 rounded-md text-white hover:bg-primary">Color Trends</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg paint-splash-bg relative py-24 md:py-32 overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <!-- Animated paint splatters -->
+            <div class="absolute top-10 left-10 w-20 h-20 bg-splash rounded-full opacity-20 animate-splatter"></div>
+            <div class="absolute top-1/4 right-20 w-16 h-16 bg-secondary rounded-full opacity-20 animate-splatter" style="animation-delay: 1s;"></div>
+            <div class="absolute bottom-20 left-1/3 w-24 h-24 bg-accent rounded-full opacity-20 animate-splatter" style="animation-delay: 2s;"></div>
+            <div class="absolute bottom-1/3 right-10 w-18 h-18 bg-primary rounded-full opacity-20 animate-splatter" style="animation-delay: 1.5s;"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="md:flex items-center">
+                <div class="md:w-1/2 text-center md:text-left">
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight">
+                        <span class="inline-block">Ignite Your Space</span><br>
+                        <span class="text-secondary animate-pulse inline-block">With Vivid Color</span>
+                    </h1>
+                    <p class="text-xl text-light opacity-90 mb-8 max-w-lg mx-auto md:mx-0">
+                        Premium paints and masterful services to transform your vision into reality.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="products.html" class="bg-secondary text-dark px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition duration-300 transform hover:scale-105 shadow-xl animate-float-up flex items-center justify-center">
+                            <i class="fas fa-paint-brush mr-2"></i> Shop Now
+                        </a>
+                        <a href="services.html" class="bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition duration-300 transform hover:scale-105 shadow-xl animate-float-up delay-200 flex items-center justify-center">
+                            <i class="fas fa-brush mr-2"></i> Our Services
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center mt-10 md:mt-0 relative">
+                    <div class="relative w-72 h-72 md:w-96 md:h-96">
+                        <div class="absolute inset-0 bg-heroLight rounded-full opacity-20 animate-pulse-slow"></div>
+                        <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cGFpbnQlMjBzaG9wfGVufDB8fDB8fHww" 
+                             alt="Paint cans" 
+                             class="absolute inset-0 w-full h-full object-contain rounded-full border-8 border-white shadow-2xl animate-float-up">
+                        <div class="absolute -top-10 -left-10 w-24 h-24 bg-splash rounded-full opacity-30 animate-splatter"></div>
+                        <div class="absolute -bottom-5 -right-5 w-20 h-20 bg-secondary rounded-full opacity-30 animate-splatter" style="animation-delay: 1s;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-20 bg-light transform -skew-y-3"></div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-white brush-stroke">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold text-dark mb-4 animate-pulse">Why Amritha Traders?</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Unmatched quality, vibrant colors, and creativity unleashed.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="paint-card bg-light p-8 rounded-2xl shadow-lg">
+                    <div class="w-20 h-20 bg-primary bg-opacity-20 rounded-full flex items-center justify-center mb-6 mx-auto animate-paint-drip">
+                        <i class="fas fa-palette text-primary text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-dark mb-3 text-center">300+ Shades</h3>
+                    <p class="text-gray-600 text-center">A spectrum of colors to ignite your imagination.</p>
+                </div>
+                <div class="paint-card bg-light p-8 rounded-2xl shadow-lg">
+                    <div class="w-20 h-20 bg-secondary bg-opacity-20 rounded-full flex items-center justify-center mb-6 mx-auto animate-paint-drip">
+                        <i class="fas fa-shield-alt text-secondary text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-dark mb-3 text-center">15-Year Durability</h3>
+                    <p class="text-gray-600 text-center">Long-lasting beauty that stands the test of time.</p>
+                </div>
+                <div class="paint-card bg-light p-8 rounded-2xl shadow-lg">
+                    <div class="w-20 h-20 bg-accent bg-opacity-20 rounded-full flex items-center justify-center mb-6 mx-auto animate-paint-drip">
+                        <i class="fas fa-brush text-accent text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-dark mb-3 text-center">Master Painters</h3>
+                    <p class="text-gray-600 text-center">Artistry meets precision for stunning results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="py-20 bg-gray-50 paint-splash-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold text-dark mb-4">Featured Paint Collections</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Discover paints that inspire and endure.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="paint-card bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1579547945413-497e1b99dac0" 
+                             alt="Interior Paint" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm animate-pulse">Hot Pick</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-xl font-bold text-dark mb-2">Velvet Luxe</h3>
+                                <p class="text-gray-600 mb-4">Silky matte finish for dreamy interiors.</p>
+                            </div>
+                            <div class="flex items-center text-secondary">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-primary">₹1,499</span>
+                            <a href="products.html" class="text-primary font-semibold hover:text-dark transition duration-300 flex items-center">
+                                Explore <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="paint-card bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1622372738946-62e02505feb3" 
+                             alt="Exterior Paint" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <div class="absolute top-4 right-4 bg-accent text-white px-3 py-1 rounded-full text-sm animate-pulse">Weatherproof</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-xl font-bold text-dark mb-2">StormGuard</h3>
+                                <p class="text-gray-600 mb-4">Tough protection for any climate.</p>
+                            </div>
+                            <div class="flex items-center text-secondary">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-primary">₹2,099</span>
+                            <a href="products.html" class="text-primary font-semibold hover:text-dark transition duration-300 flex items-center">
+                                Explore <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="paint-card bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" 
+                             alt="Eco Paint" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <div class="absolute top-4 right-4 bg-secondary text-dark px-3 py-1 rounded-full text-sm animate-pulse">Eco-Friendly</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-xl font-bold text-dark mb-2">Green Bliss</h3>
+                                <p class="text-gray-600 mb-4">Zero-VOC for a healthier home.</p>
+                            </div>
+                            <div class="flex items-center text-secondary">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-primary">₹1,799</span>
+                            <a href="products.html" class="text-primary font-semibold hover:text-dark transition duration-300 flex items-center">
+                                Explore <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="products.html" class="bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition duration-300 transform hover:scale-105 shadow-lg animate-pulse-glow inline-flex items-center">
+                    <i class="fas fa-box-open mr-2"></i> View All Products
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Color Inspiration Section -->
+    <section class="py-20 bg-white brush-stroke">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold text-dark mb-4">Color Inspiration</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Trending palettes to spark your creativity</p>
+            </div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-6 mb-12">
+                <div class="color-swatch w-full h-32 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 relative overflow-hidden group">
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-30">
+                        <span class="text-white font-bold">Mystic Twilight</span>
+                    </div>
+                </div>
+                <div class="color-swatch w-full h-32 rounded-xl bg-gradient-to-br from-amber-400 to-red-500 relative overflow-hidden group">
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-30">
+                        <span class="text-white font-bold">Sunset Blaze</span>
+                    </div>
+                </div>
+                <div class="color-swatch w-full h-32 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-600 relative overflow-hidden group">
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-30">
+                        <span class="text-white font-bold">Emerald Oasis</span>
+                    </div>
+                </div>
+                <div class="color-swatch w-full h-32 rounded-xl bg-gradient-to-br from-rose-400 to-pink-600 relative overflow-hidden group">
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-30">
+                        <span class="text-white font-bold">Blushing Petal</span>
+                    </div>
+                </div>
+                <div class="color-swatch w-full h-32 rounded-xl bg-gradient-to-br from-slate-700 to-gray-900 relative overflow-hidden group">
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-30">
+                        <span class="text-white font-bold">Urban Noir</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-dark text-white p-8 rounded-2xl shadow-2xl">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-2/3 mb-6 md:mb-0">
+                        <h3 class="text-2xl font-bold mb-4">Need Color Inspiration?</h3>
+                        <p class="mb-6 opacity-90">Our color experts can help you find the perfect palette for your space.</p>
+                        <a href="contact.html" class="bg-secondary text-dark px-6 py-3 rounded-full font-semibold hover:bg-opacity-90 transition duration-300 transform hover:scale-105 animate-pulse-glow inline-flex items-center">
+                            <i class="fas fa-user-tie mr-2"></i> Consult Our Experts
+                        </a>
+                    </div>
+                    <div class="md:w-1/3 mt-6 md:mt-0">
+                        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6" 
+                             alt="Room preview" 
+                             class="w-full h-48 object-cover rounded-lg shadow-lg animate-float-up">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Preview Section -->
+    <section class="py-20 bg-gray-50 paint-splash-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold text-dark mb-4">Our Painting Services</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Professional application for flawless results</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="paint-card bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115" 
+                             alt="Interior Painting" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <div class="w-10 h-10 bg-primary bg-opacity-20 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-home text-primary"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-dark">Interior Artistry</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Elevate your home with flawless finishes and perfect color application.</p>
+                        <a href="services.html" class="text-primary font-semibold hover:text-dark transition duration-300 flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="paint-card bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154" 
+                             alt="Exterior Painting" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <div class="w-10 h-10 bg-accent bg-opacity-20 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-building text-accent"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-dark">Exterior Brilliance</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Weatherproof beauty that lasts through seasons with our premium coatings.</p>
+                        <a href="services.html" class="text-primary font-semibold hover:text-dark transition duration-300 flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="paint-card bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1606744837616-56c9a5c6a6eb" 
+                             alt="Commercial Painting" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <div class="w-10 h-10 bg-secondary bg-opacity-20 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-store text-secondary"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-dark">Commercial Impact</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Bold colors for bold businesses that want to make a statement.</p>
+                        <a href="services.html" class="text-primary font-semibold hover:text-dark transition duration-300 flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-1">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="services.html" class="bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition duration-300 transform hover:scale-105 shadow-lg animate-pulse-glow inline-flex items-center">
+                    <i class="fas fa-brush mr-2"></i> Explore All Services
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-white brush-stroke">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold text-dark mb-4">What Our Customers Say</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Hear from happy homeowners and businesses</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="paint-card bg-light p-6 rounded-2xl shadow-lg relative">
+                    <div class="absolute -top-4 -left-4 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 italic">"The color consultation was spot on! Our living room has never looked better. The painters were professional and left no mess."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Customer" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold text-dark">Priya Sharma</h4>
+                            <div class="flex items-center text-secondary text-sm">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="paint-card bg-light p-6 rounded-2xl shadow-lg relative">
+                    <div class="absolute -top-4 -left-4 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 italic">"Our office looks completely transformed. The team worked efficiently around our business hours with minimal disruption."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Customer" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold text-dark">Rahul Patel</h4>
+                            <div class="flex items-center text-secondary text-sm">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="paint-card bg-light p-6 rounded-2xl shadow-lg relative">
+                    <div class="absolute -top-4 -left-4 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 italic">"The exterior paint has held up beautifully through monsoon season. Worth every rupee for the quality and service."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Customer" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold text-dark">Ananya Reddy</h4>
+                            <div class="flex items-center text-secondary text-sm">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-heroDark to-heroLight text-white relative overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-0 left-0 w-32 h-32 bg-primary rounded-full opacity-10 animate-paint-drip"></div>
+            <div class="absolute bottom-0 right-0 w-40 h-40 bg-secondary rounded-full opacity-10 animate-paint-drip" style="animation-delay: 1s;"></div>
+            <div class="absolute top-1/3 right-1/4 w-24 h-24 bg-accent rounded-full opacity-10 animate-paint-drip" style="animation-delay: 2s;"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center">
+                <h2 class="text-4xl font-extrabold mb-6">Ready to Transform Your Space?</h2>
+                <p class="text-xl opacity-90 mb-8 max-w-3xl mx-auto">Get a free color consultation and estimate from our experts today.</p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="contact.html" class="bg-white text-primary px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition duration-300 transform hover:scale-105 shadow-xl animate-pulse-glow flex items-center justify-center">
+                        <i class="fas fa-calendar-alt mr-2"></i> Book Consultation
+                    </a>
+                    <a href="tel:+919876543210" class="bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition duration-300 transform hover:scale-105 shadow-xl animate-pulse-glow delay-200 flex items-center justify-center">
+                        <i class="fas fa-phone-alt mr-2"></i> Call Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                <div>
+                    <a href="index.html" class="flex items-center mb-6">
+                        <i class="fas fa-paint-roller text-primary text-2xl mr-3"></i>
+                        <span class="text-xl font-extrabold">Amritha Traders</span>
+                    </a>
+                    <p class="text-gray-400 mb-4">Premium paints and color solutions for homes and businesses across India.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-primary transition duration-300">Home</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-primary transition duration-300">About Us</a></li>
+                        <li><a href="products.html" class="text-gray-400 hover:text-primary transition duration-300">Products</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-primary transition duration-300">Services</a></li>
+                        <li><a href="gallery.html" class="text-gray-400 hover:text-primary transition duration-300">Gallery</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-primary transition duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Products</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition duration-300">Interior Paints</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition duration-300">Exterior Paints</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition duration-300">Wood Finishes</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition duration-300">Metal Paints</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition duration-300">Textures</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition duration-300">Primers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-primary mt-1 mr-3"></i>
+                            <span>123 Paint Street, Color Nagar, Bangalore, Karnataka 560001</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-primary mr-3"></i>
+                            <a href="tel:+919876543210" class="hover:text-primary transition duration-300">+91 98765 43210</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-primary mr-3"></i>
+                            <a href="mailto:info@amrithatraders.com" class="hover:text-primary transition duration-300">info@amrithatraders.com</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-clock text-primary mr-3"></i>
+                            <span>Mon-Sat: 9AM - 8PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2023 Amritha Traders. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-primary transition duration-300 text-sm">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-primary transition duration-300 text-sm">Terms of Service</a>
+                    <a href="#" class="text-gray-500 hover:text-primary transition duration-300 text-sm">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.getElementById('mobileMenuButton').addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('open');
+            
+            // Change icon
+            const icon = this.querySelector('i');
+            if (menu.classList.contains('open')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.remove('open');
+                document.getElementById('mobileMenuButton').querySelector('i').classList.remove('fa-times');
+                document.getElementById('mobileMenuButton').querySelector('i').classList.add('fa-bars');
+            });
+        });
+
+        // Animate elements when they come into view
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.paint-card, .color-swatch, .gallery-item');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.classList.add('animate__animated', 'animate__fadeInUp');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>

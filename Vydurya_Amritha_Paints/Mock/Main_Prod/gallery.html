@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amritha Traders - Color Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF3366',
+                        secondary: '#FFD700',
+                        accent: '#00D4B4',
+                        dark: '#1A1A2E',
+                        light: '#F9F7F7',
+                        splash: '#FF6F61',
+                        heroDark: '#2D1B3F',
+                        heroLight: '#6B4E71',
+                    },
+                    animation: {
+                        'paint-drip': 'paintDrip 4s infinite ease-in-out',
+                        'splatter': 'splatter 5s infinite',
+                        'brush-stroke': 'brushStroke 3s infinite',
+                        'float-up': 'floatUp 3s infinite',
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                        'color-shift': 'colorShift 6s infinite',
+                        'fade-in': 'fadeIn 1s ease-in'
+                    },
+                    keyframes: {
+                        paintDrip: {
+                            '0%, 100%': { transform: 'translateY(0) scale(1)' },
+                            '50%': { transform: 'translateY(20px) scale(1.1)' }
+                        },
+                        splatter: {
+                            '0%': { transform: 'rotate(0deg) scale(1)' },
+                            '50%': { transform: 'rotate(15deg) scale(1.2)' },
+                            '100%': { transform: 'rotate(0deg) scale(1)' }
+                        },
+                        brushStroke: {
+                            '0%': { transform: 'translateX(-10px)' },
+                            '50%': { transform: 'translateX(10px)' },
+                            '100%': { transform: 'translateX(-10px)' }
+                        },
+                        floatUp: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' }
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 10px rgba(255, 51, 102, 0.5)' },
+                            '50%': { boxShadow: '0 0 20px rgba(255, 51, 102, 0.8)' }
+                        },
+                        colorShift: {
+                            '0%': { backgroundColor: '#FF3366' },
+                            '33%': { backgroundColor: '#FFD700' },
+                            '66%': { backgroundColor: '#00D4B4' },
+                            '100%': { backgroundColor: '#FF3366' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .paint-splash-bg {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path fill="%23FF6F61" d="M50,20 Q70,10 90,30 T110,50 Q120,70 100,90 T70,110 Q50,100 60,80 T50,20" opacity="0.3"/><path fill="%23FFD700" d="M120,30 Q140,20 160,40 T180,60 Q170,80 150,70 T120,30" opacity="0.4"/></svg>'), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path fill="%2300D4B4" d="M30,130 Q50,110 70,130 T90,150 Q80,170 60,160 T30,130" opacity="0.35"/></svg>');
+            background-repeat: no-repeat, no-repeat;
+            background-position: top left, bottom right;
+            background-size: 300px, 250px;
+        }
+
+        .brush-stroke {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100"><path fill="none" stroke="%23FF6F61" stroke-width="20" stroke-linecap="round" d="M20,80 Q100,20 280,80" opacity="0.2"/></svg>');
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 50%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+        .gallery-item:hover .gallery-info {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .gallery-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            transform: translateY(100%);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .gallery-img {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+
+        .color-filter {
+            transition: all 0.3s;
+        }
+        .color-filter:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .color-filter.active {
+            transform: scale(1.15);
+            box-shadow: 0 0 0 3px white, 0 0 0 6px var(--tw-ring-color);
+            z-index: 10;
+        }
+
+        .paint-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .paint-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .paint-splatter {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Hero Gradient with Wave Effect */
+        .hero-bg {
+            background: linear-gradient(135deg, #2D1B3F 0%, #6B4E71 50%, #FF3366 100%);
+            animation: wave 8s infinite;
+        }
+        @keyframes wave {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body class="bg-light font-sans antialiased overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="bg-dark bg-opacity-90 shadow-lg sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <i class="fas fa-paint-roller text-primary text-3xl mr-3 animate-spin-slow"></i>
+                        <span class="text-2xl font-extrabold text-white tracking-wide">Amritha Traders</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html" class="text-white hover:text-primary font-medium transition duration-300 nav-link"> <i class="fas fa-home mr-2"></i>Home</a>
+                    <a href="about.html" class="text-white hover:text-primary font-medium transition duration-300 nav-link"><i class="fas fa-info-circle mr-2"></i> About Us</a>
+                    <a href="products.html" class="text-white hover:text-primary font-medium transition duration-300 nav-link">  <i class="fas fa-paint-roller mr-2"></i>Products</a>
+                    <a href="services.html" class="text-white hover:text-primary font-medium transition duration-300 nav-link">   <i class="fas fa-brush mr-2"></i> Services</a>
+                    <a href="gallery.html" class="text-white hover:text-primary font-medium transition duration-300 nav-link"> <i class="fas fa-images mr-2"></i> Gallery</a>
+                    <a href="contact.html" class="text-white hover:text-primary font-medium transition duration-300 nav-link">  <i class="fas fa-envelope mr-2"></i> Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobileMenuButton" class="text-white hover:text-primary focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="mobile-menu md:hidden bg-dark bg-opacity-95 rounded-lg mt-2 hidden">
+                <div class="px-2 pt-2 pb-3 space-y-1">
+                    <a href="index.html" class="block px-3 py-2 rounded-md text-white hover:bg-primary hover:text-white">Home</a>
+                    <a href="about.html" class="block px-3 py-2 rounded-md text-white hover:bg-primary hover:text-white">About Us</a>
+                    <a href="products.html" class="block px-3 py-2 rounded-md text-white hover:bg-primary hover:text-white">Products</a>
+                    <a href="services.html" class="block px-3 py-2 rounded-md text-white hover:bg-primary hover:text-white">Services</a>
+                    <a href="gallery.html" class="block px-3 py-2 rounded-md text-white hover:bg-primary hover:text-white">Gallery</a>
+                    <a href="contact.html" class="block px-3 py-2 rounded-md text-white hover:bg-primary hover:text-white">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg paint-splash-bg relative py-24 md:py-32 overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="paint-splatter w-20 h-20 bg-splash rounded-full top-10 left-10 animate-splatter"></div>
+            <div class="paint-splatter w-16 h-16 bg-secondary rounded-full top-1/4 right-20 animate-splatter" style="animation-delay: 1s;"></div>
+            <div class="paint-splatter w-24 h-24 bg-accent rounded-full bottom-20 left-1/3 animate-splatter" style="animation-delay: 2s;"></div>
+            <div class="paint-splatter w-18 h-18 bg-primary rounded-full bottom-1/3 right-10 animate-splatter" style="animation-delay: 1.5s;"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center">
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight">
+                    <span class="inline-block">Our Color Gallery</span>
+                </h1>
+                <p class="text-xl text-light opacity-90 mb-8 max-w-2xl mx-auto">
+                    Explore stunning transformations and vibrant color inspirations from our completed projects
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#interior" class="bg-primary text-white px-6 py-2 rounded-full font-medium hover:bg-opacity-90 transition duration-300 animate-float-up">
+                        Interior
+                    </a>
+                    <a href="#exterior" class="bg-secondary text-dark px-6 py-2 rounded-full font-medium hover:bg-opacity-90 transition duration-300 animate-float-up" style="animation-delay: 0.2s;">
+                        Exterior
+                    </a>
+                    <a href="#commercial" class="bg-accent text-white px-6 py-2 rounded-full font-medium hover:bg-opacity-90 transition duration-300 animate-float-up" style="animation-delay: 0.4s;">
+                        Commercial
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-20 bg-light transform -skew-y-3"></div>
+    </section>
+
+    <!-- Color Filters -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="color-filter bg-red-500 w-12 h-12 rounded-full ring-primary" data-color="red"></button>
+                <button class="color-filter bg-blue-500 w-12 h-12 rounded-full ring-primary" data-color="blue"></button>
+                <button class="color-filter bg-green-500 w-12 h-12 rounded-full ring-primary" data-color="green"></button>
+                <button class="color-filter bg-yellow-400 w-12 h-12 rounded-full ring-primary" data-color="yellow"></button>
+                <button class="color-filter bg-purple-500 w-12 h-12 rounded-full ring-primary" data-color="purple"></button>
+                <button class="color-filter bg-pink-500 w-12 h-12 rounded-full ring-primary" data-color="pink"></button>
+                <button class="color-filter bg-orange-500 w-12 h-12 rounded-full ring-primary" data-color="orange"></button>
+                <button class="color-filter bg-gray-500 w-12 h-12 rounded-full ring-primary" data-color="gray"></button>
+                <button class="color-filter bg-white border-2 border-gray-300 w-12 h-12 rounded-full ring-primary" data-color="white"></button>
+                <button class="color-filter bg-black w-12 h-12 rounded-full ring-primary" data-color="black"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interior Gallery -->
+    <section id="interior" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-dark mb-3 flex items-center justify-center">
+                    <i class="fas fa-couch text-primary mr-3 animate-paint-drip"></i>
+                    Interior Transformations
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Stunning before-and-after showcases of residential interiors</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="gallery-item rounded-2xl shadow-lg overflow-hidden h-80">
+                    <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace" 
+                         alt="Living Room Makeover" 
+                         class="gallery-img w-full h-full object-cover">
+                    <div class="gallery-info">
+                        <h3 class="text-xl font-bold text-white mb-1">Modern Living Room</h3>
+                        <p class="text-gray-200 text-sm">From dull beige to vibrant teal accent wall</p>
+                        <div class="flex mt-2">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">Before/After</span>
+                            <span class="bg-secondary text-dark text-xs px-2 py-1 rounded ml-2">Velvet Luxe Paint</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-2xl shadow-lg overflow-hidden h-80">
+                    <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3" 
+                         alt="Kitchen Renovation" 
+                         class="gallery-img w-full h-full object-cover">
+                    <div class="gallery-info">
+                        <h3 class="text-xl font-bold text-white mb-1">Contemporary Kitchen</h3>
+                        <p class="text-gray-200 text-sm">Two-tone cabinets with matte finish</p>
+                        <div class="flex mt-2">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">Cabinetry</span>
+                            <span class="bg-accent text-white text-xs px-2 py-1 rounded ml-2">Eco-Friendly</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-2xl shadow-lg overflow-hidden h-80">
+                    <img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab" 
+                         alt="Bedroom Makeover" 
+                         class="gallery-img w-full h-full object-cover">
+                    <div class="gallery-info">
+                        <h3 class="text-xl font-bold text-white mb-1">Serene Bedroom</h3>
+                        <p class="text-gray-200 text-sm">Soft neutral palette with textured accent wall</p>
+                        <div class="flex mt-2">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">Texture Paint</span>
+                            <span class="bg-splash text-white text-xs px-2 py-1 rounded ml-2">Custom Mix</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-2xl shadow-lg overflow-hidden h-80">
+                    <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92" 
+                         alt="Dining Room" 
+                         class="gallery-img w-full h-full object-cover">
+                    <div class="gallery-info">
+                        <h3 class="text-xl font-bold text-white mb-1">Elegant Dining</h3>
+                        <p class="text-gray-200 text-sm">Deep navy feature wall with gold accents</p>
+                        <div class="flex mt-2">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">Metallic Finish</span>
+                            <span class="bg-secondary text-dark text-xs px-2 py-1 rounded ml-2">Luxury Line</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-2xl shadow-lg overflow-hidden h-80">
+                    <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea" 
+                         alt="Bathroom Makeover" 
+                         class="gallery-img w-full h-full object-cover">
+                    <div class="gallery-info">
+                        <h3 class="text-xl font-bold text-white mb-1">Spa Bathroom</h3>
+                        <p class="text-gray-200 text-sm">Waterproof coating in soothing sage green</p>
+                        <div class="flex mt-2">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">Bathroom</span>
+                            <span class="bg-accent text-white text-xs px-2 py-1 rounded ml-2">Mold-Resistant</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-2xl shadow-lg overflow-hidden h-80">
+                    <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154" 
+                         alt="Kids Room" 
+                         class="gallery-img w-full h-full object-cover">
+                    <div class="gallery-info">
+                        <h3 class="text-xl font-bold text-white mb-1">Playful Kids Room</h3>
+                        <p class="text-gray-200 text-sm">Chalkboard wall with colorful geometric patterns</p>
+                        <div class="flex mt-2">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">Creative</span>
+                            <span class="bg-secondary text-dark text-xs px-2 py-1 rounded ml-2">Washable</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exterior Gallery -->
+    <section id="exterior" class="py-20 bg-white brush-stroke">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-dark mb-3 flex items-center justify-center">
+                    <i class="fas fa-home text-primary mr-3 animate-paint-drip"></i>
+                    Exterior Makeovers
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Dramatic transformations that enhance curb appeal</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="gallery-item rounded-2xl shadow-lg overflow-hidden h-80">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c" 
+                         alt="House Exterior" 
+                         class="gallery-img w-full h-full object-cover">
+                    <div class="gallery-info">
+                        <h3 class="text-xl font-bold text-white mb-1">Traditional Home</h3>
+                        <p class="text-gray-200 text-sm">Complete exterior refresh with period colors</p>
+                        <div class="flex mt-2">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">Historic</span>
+                            <span class="bg-secondary text-dark text-xs px-2 py-1 rounded ml-2">Weatherproof</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-2xl shadow-lg overflow-hidden h-80">
+                    <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d" 
+                         alt="Modern House" 
+                         class="gallery-img w-full h-full object-cover">
+                    <div class="gallery-info">
+                        <h3 class="text-xl font-bold text-white mb-1">Contemporary Facade</h3>
+                        <p class="text-gray-200 text-sm">Bold color blocking on modern architecture</p>
+                        <div class="flex mt-2">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">Modern</span>
+                            <span class="bg-accent text-white text-xs px-2 py-1 rounded ml-2">UV-Resistant</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-2xl shadow-lg overflow-hidden h-80">
+                    <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154" 
+                         alt="Cottage Exterior" 
+                         class="gallery-img w-full h-full object-cover">
+                    <div class="gallery-info">
+                        <h3 class="text-xl font-bold text-white mb-1">Coastal Cottage</h3>
+                        <p class="text-gray-200 text-sm">Weather-resistant finish in beachy palette</p>
+                        <div class="flex mt-2">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">Coastal</span>
+                            <span class="bg-splash text-white text-xs px-2 py-1 rounded ml-2">Salt-Resistant</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-2xl shadow-lg overflow-hidden h-80">
+                    <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d" 
+                         alt="Front Door" 
+                         class="gallery-img w-full h-full object-cover">
+                    <div class="gallery-info">
+                        <h3 class="text-xl font-bold text-white mb-1">Statement Entryway</h3>
+                        <p class="text-gray-200 text-sm">Vibrant front door with matching trim</p>
+                        <div class="flex mt-2">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">Door</span>
+                            <span class="bg-secondary text-dark text-xs px-2 py-1 rounded ml-2">High-Gloss</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-2xl shadow-lg overflow-hidden h-80">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c" 
+                         alt="Fence Painting" 
+                         class="gallery-img w-full h-full object-cover">
+                    <div class="gallery-info">
+                        <h3 class="text-xl font-bold text-white mb-1">Garden Fence</h3>
+                        <p class="text-gray-200 text-sm">Wood treatment with semi-transparent stain</p>
+                        <div class="flex mt-2">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">Wood Care</span>
+                            <span class="bg-accent text-white text-xs px-2 py-1 rounded ml-2">Eco-Stain</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-2xl shadow-lg overflow-hidden h-80">
+                    <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d" 
+                         alt="Deck Restoration" 
+                         class="gallery-img w-full h-full object-cover">
+                    <div class="gallery-info">
+                        <h3 class="text-xl font-bold text-white mb-1">Deck Revival</h3>
+                        <p class="text-gray-200 text-sm">From weathered to weatherproof in 3 days</p>
+                        <div class="flex mt-2">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">Deck</span>
+                            <span class="bg-secondary text-dark text-xs px-2 py-1 rounded ml-2">Slip-Resistant</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Commercial Gallery -->
+    <section id="commercial" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-dark mb-3 flex items-center justify-center">
+                    <i class="fas fa-building text-primary mr-3 animate-paint-drip"></i>
+                    Commercial Projects
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Professional spaces transformed with color psychology</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="gallery-item rounded-2xl shadow-lg overflow-hidden h-80">
+                    <img src="https://images.unsplash.com/photo-1606744837616-56c9a5c6a6eb" 
+                         alt="Office Space" 
+                         class="gallery-img w-full h-full object-cover">
+                    <div class="gallery-info">
+                        <h3 class="text-xl font-bold text-white mb-1">Corporate Office</h3>
+                        <p class="text-gray-200 text-sm">Brand-aligned colors for professional environment</p>
+                        <div class="flex mt-2">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">Office</span>
+                            <span class="bg-secondary text-dark text-xs px-2 py-1 rounded ml-2">Low-VOC</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-2xl shadow-lg overflow-hidden h-80">
+                    <img src="https://images.unsplash.com/photo-1606744837616-56c9a5c6a6eb" 
+                         alt="Retail Store" 
+                         class="gallery-img w-full h-full object-cover">
+                    <div class="gallery-info">
+                        <h3 class="text-xl font-bold text-white mb-1">Boutique Retail</h3>
+                        <p class="text-gray-200 text-sm">Eye-catching accent wall drives foot traffic</p>
+                        <div class="flex mt-2">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">Retail</span>
+                            <span class="bg-accent text-white text-xs px-2 py-1 rounded ml-2">Washable</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-2xl shadow-lg overflow-hidden h-80">
+                    <img src="https://images.unsplash.com/photo-1606744837616-56c9a5c6a6eb" 
+                         alt="Restaurant" 
+                         class="gallery-img w-full h-full object-cover">
+                    <div class="gallery-info">
+                        <h3 class="text-xl font-bold text-white mb-1">Upscale Restaurant</h3>
+                        <p class="text-gray-200 text-sm">Mood-setting colors complement cuisine</p>
+                        <div class="flex mt-2">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">Hospitality</span>
+                            <span class="bg-splash text-white text-xs px-2 py-1 rounded ml-2">Grease-Resistant</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-2xl shadow-lg overflow-hidden h-80">
+                    <img src="https://images.unsplash.com/photo-1606744837616-56c9a5c6a6eb" 
+                         alt="Hotel Lobby" 
+                         class="gallery-img w-full h-full object-cover">
+                    <div class="gallery-info">
+                        <h3 class="text-xl font-bold text-white mb-1">Hotel Lobby</h3>
+                        <p class="text-gray-200 text-sm">Luxury finishes withstand high traffic</p>
+                        <div class="flex mt-2">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">Lobby</span>
+                            <span class="bg-secondary text-dark text-xs px-2 py-1 rounded ml-2">Scratch-Resistant</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-2xl shadow-lg overflow-hidden h-80">
+                    <img src="https://images.unsplash.com/photo-1606744837616-56c9a5c6a6eb" 
+                         alt="Medical Office" 
+                         class="gallery-img w-full h-full object-cover">
+                    <div class="gallery-info">
+                        <h3 class="text-xl font-bold text-white mb-1">Medical Clinic</h3>
+                        <p class="text-gray-200 text-sm">Soothing palette with antimicrobial coating</p>
+                        <div class="flex mt-2">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">Healthcare</span>
+                            <span class="bg-accent text-white text-xs px-2 py-1 rounded ml-2">Sanitizable</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-2xl shadow-lg overflow-hidden h-80">
+                    <img src="https://images.unsplash.com/photo-1606744837616-56c9a5c6a6eb" 
+                         alt="School" 
+                         class="gallery-img w-full h-full object-cover">
+                    <div class="gallery-info">
+                        <h3 class="text-xl font-bold text-white mb-1">Elementary School</h3>
+                        <p class="text-gray-200 text-sm">Vibrant, durable colors for learning spaces</p>
+                        <div class="flex mt-2">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">Education</span>
+                            <span class="bg-secondary text-dark text-xs px-2 py-1 rounded ml-2">Child-Safe</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-primary text-white brush-stroke">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-4xl font-extrabold mb-6">Inspired by What You See?</h2>
+                <p class="text-xl opacity-90 mb-8 max-w-3xl mx-auto">Bring your vision to life with our premium paints and expert services.</p>
+                <div class="flex justify-center space-x-6">
+                    <a href="products.html" class="bg-secondary text-dark px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition duration-300 transform hover:scale-105 shadow-lg animate-pulse-glow">
+                        <i class="fas fa-paint-roller mr-2"></i> Shop Products
+                    </a>
+                    <a href="contact.html" class="bg-white text-primary px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition duration-300 transform hover:scale-105 shadow-lg animate-pulse-glow">
+                        <i class="fas fa-phone-alt mr-2"></i> Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-16 paint-splash-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-paint-brush text-primary text-3xl mr-3 animate-spin-slow"></i>
+                        <span class="text-2xl font-extrabold">Amritha Traders</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">Premium paints and expert services to bring your colorful vision to life.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300"><i class="fab fa-facebook-f text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300"><i class="fab fa-pinterest-p text-xl"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-gray-400 hover:text-primary transition duration-300">Home</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-primary transition duration-300">About Us</a></li>
+                        <li><a href="products.html" class="text-gray-400 hover:text-primary transition duration-300">Products</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-primary transition duration-300">Services</a></li>
+                        <li><a href="gallery.html" class="text-gray-400 hover:text-primary transition duration-300">Gallery</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-primary transition duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Products</h3>
+                    <ul class="space-y-3">
+                        <li><a href="products.html" class="text-gray-400 hover:text-primary transition duration-300">Interior Paints</a></li>
+                        <li><a href="products.html" class="text-gray-400 hover:text-primary transition duration-300">Exterior Paints</a></li>
+                        <li><a href="products.html" class="text-gray-400 hover:text-primary transition duration-300">Eco-Friendly Paints</a></li>
+                        <li><a href="products.html" class="text-gray-400 hover:text-primary transition duration-300">Metallic Finishes</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Newsletter</h3>
+                    <p class="text-gray-400 mb-4">Stay updated with color trends and offers.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Your email" class="flex-grow px-4 py-2 rounded-l-full text-dark">
+                        <button class="bg-primary px-4 py-2 rounded-r-full font-semibold hover:bg-opacity-90 transition duration-300">Join</button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center">
+                <p class="text-gray-400">© 2025 Amritha Traders. All rights reserved.</p>
+                <div class="flex justify-center space-x-6 mt-4">
+                    <a href="#" class="text-gray-400 hover:text-primary transition duration-300">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition duration-300">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300 animate-pulse-glow">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Back to Top
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Color Filter (Basic Implementation - Placeholder Logic)
+        const colorFilters = document.querySelectorAll('.color-filter');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        colorFilters.forEach(filter => {
+            filter.addEventListener('click', () => {
+                colorFilters.forEach(f => f.classList.remove('active'));
+                filter.classList.add('active');
+                const selectedColor = filter.getAttribute('data-color');
+                // Placeholder: Add logic here to filter gallery items by color if metadata exists
+                console.log(`Filtering by color: ${selectedColor}`);
+            });
+        });
+    </script>
+</body>
+</html>
